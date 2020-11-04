@@ -1,0 +1,41 @@
+{
+  "name": "epic-cli",
+  "version": "1.0.0",
+  "repository": "github:tobua/epic-cli",
+  "license": "MIT",
+  "author": "Matthias Giger",
+  "scripts": {
+    "refresh": "node cli/refresh.js",
+    "version": "node cli/version.js"
+  },
+  "padua": {
+    "source": true
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  },
+  "type": "module",
+  "bin": {
+    "refresh": "cli/refresh.js",
+    "version": "cli/version.js"
+  },
+  "files": [
+    "cli"
+  ],
+  "devDependencies": {
+    "padua": "^0.1.4"
+  },
+  "prettier": "padua/configuration/.prettierrc.json",
+  "eslintConfig": {
+    "extends": "./node_modules/padua/configuration/eslint.cjs",
+    "rules": {
+      "import/extensions": [
+        2,
+        "always"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">= 13.2.0"
+  }
+}
