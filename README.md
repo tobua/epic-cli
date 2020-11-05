@@ -26,3 +26,8 @@ version
 
 Check if node and npm are up-to-date.
 
+```
+update
+```
+
+Update current package versions to their latest release.

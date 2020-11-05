@@ -6,18 +6,22 @@
   "author": "Matthias Giger",
   "scripts": {
     "refresh": "node cli/refresh.js",
-    "version": "node cli/version.js"
+    "version": "node cli/version.js",
+    "update": "node cli/update.js"
   },
   "padua": {
     "source": true
   },
   "dependencies": {
+    "latest-version": "^5.1.0",
+    "npm-check-updates": "^9.2.4",
     "rimraf": "^3.0.2"
   },
   "type": "module",
   "bin": {
     "refresh": "cli/refresh.js",
-    "version": "cli/version.js"
+    "version": "cli/version.js",
+    "update": "cli/update.js"
   },
   "files": [
     "cli"
