@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/tobua/epic-cli/compare/v1.1.0...v1.2.0) (2020-11-07)
+
+
+### Features
+
+* **scripts:** add new global command to list and update global packages ([47cafa4](https://github.com/tobua/epic-cli/commit/47cafa47031ba9f2be8ad5282331d80e3627f462))
+
+
+### Bug Fixes
+
+* **update:** use sync method ([74edb2b](https://github.com/tobua/epic-cli/commit/74edb2b1d5de9dc4bfcfd2099c2dd807efc8343c))
+
 ## [1.1.0](https://github.com/tobua/epic-cli/compare/v1.0.0...v1.1.0) (2020-11-05)
 
 
