@@ -1,11 +1,11 @@
 #!/usr/bin/env node
+import { execSync } from 'child_process'
 import update from 'npm-check-updates'
 
-console.log(process.env.INIT_CWD, process.cwd(), process.env.PWD, '\n')
+execSync('npm list -g --depth=0', { stdio: 'inherit' })
 
 await update.run({
-  // Directly write new versions to package.json.
-  upgrade: true,
+  global: true,
   // Verbose.
   silent: false,
   // Use regular formatter, not JSON.

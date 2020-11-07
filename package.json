@@ -7,7 +7,8 @@
   "scripts": {
     "refresh": "node cli/refresh.js",
     "version": "node cli/version.js",
-    "update": "node cli/update.js"
+    "update": "node cli/update.js",
+    "global": "node cli/global.js"
   },
   "padua": {
     "source": true
@@ -21,7 +22,8 @@
   "bin": {
     "refresh": "cli/refresh.js",
     "version": "cli/version.js",
-    "update": "cli/update.js"
+    "update": "cli/update.js",
+    "global": "cli/global.js"
   },
   "files": [
     "cli"

@@ -31,3 +31,9 @@ update
 ```
 
 Update current package versions to their latest release.
+
+```
+global
+```
+
+List and update globally installed packages.
