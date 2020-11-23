@@ -37,3 +37,9 @@ global
 ```
 
 List and update globally installed packages.
+
+### without full installation (One-time use)
+
+```
+npx -p epic-cli update
+```
