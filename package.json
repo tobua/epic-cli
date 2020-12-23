@@ -5,31 +5,34 @@
   "license": "MIT",
   "author": "Matthias Giger",
   "scripts": {
+    "format": "node cli/format.js",
+    "global": "node cli/global.js",
     "refresh": "node cli/refresh.js",
-    "version": "node cli/version.js",
     "update": "node cli/update.js",
-    "global": "node cli/global.js"
+    "version": "node cli/version.js"
   },
   "padua": {
     "source": true
   },
   "dependencies": {
     "latest-version": "^5.1.0",
-    "npm-check-updates": "^9.2.4",
+    "npm-check-updates": "^10.2.5",
+    "pakag": "^2.2.0",
     "rimraf": "^3.0.2"
   },
   "type": "module",
   "bin": {
+    "format": "cli/format.js",
+    "global": "cli/global.js",
     "refresh": "cli/refresh.js",
-    "version": "cli/version.js",
     "update": "cli/update.js",
-    "global": "cli/global.js"
+    "version": "cli/version.js"
   },
   "files": [
     "cli"
   ],
   "devDependencies": {
-    "padua": "^0.1.4"
+    "padua": "^0.2.1"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {

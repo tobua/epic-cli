@@ -38,6 +38,12 @@ global
 
 List and update globally installed packages.
 
+```
+format
+```
+
+Format `package.json` in current folder.
+
 ### without full installation (One-time use)
 
 ```
