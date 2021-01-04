@@ -6,4 +6,4 @@ import { execSync } from 'child_process'
 rimraf.sync(join(process.cwd(), 'node_modules'))
 rimraf.sync(join(process.cwd(), 'package-lock.json'))
 
-execSync('npm install', { stdio: 'inherit' })
+execSync('npm install --legacy-peer-deps', { stdio: 'inherit' })

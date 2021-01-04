@@ -21,7 +21,6 @@
     "rimraf": "^3.0.2"
   },
   "type": "module",
-  "main": "index.js",
   "bin": {
     "format": "cli/format.js",
     "global": "cli/global.js",
@@ -29,8 +28,6 @@
     "update": "cli/update.js",
     "version": "cli/version.js"
   },
-  "source": "index.js",
-  "types": "index.d.ts",
   "files": [
     "cli"
   ],
