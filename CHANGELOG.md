@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/tobua/epic-cli/compare/v1.3.0...v1.3.1) (2021-01-04)
+
+
+### Bug Fixes
+
+* **refresh:** install legacy peer deps by default ([65740a0](https://github.com/tobua/epic-cli/commit/65740a034d20b3267fdbb5d0a4742607bf3e43f2))
+
 ## [1.3.0](https://github.com/tobua/epic-cli/compare/v1.2.0...v1.3.0) (2020-12-23)
 
 
