@@ -1,5 +1,6 @@
 {
   "name": "epic-cli",
+  "description": "Commands useful for everyday web development with node.",
   "version": "1.4.0",
   "repository": "github:tobua/epic-cli",
   "license": "MIT",
@@ -12,10 +13,11 @@
   },
   "dependencies": {
     "latest-version": "^5.1.0",
-    "npm-check-updates": "^11.1.9",
-    "pakag": "^2.3.0",
+    "npm-check-updates": "^11.7.1",
+    "pakag": "^2.5.0",
     "rimraf": "^3.0.2",
-    "skip-local-postinstall": "^1.0.5"
+    "skip-local-postinstall": "^2.0.2",
+    "validate-npm-package-name": "^3.0.0"
   },
   "type": "module",
   "main": "index.js",
@@ -24,15 +26,15 @@
     "global": "cli/global.js",
     "refresh": "cli/refresh.js",
     "update": "cli/update.js",
-    "version": "cli/version.js"
+    "version": "cli/version.js",
+    "init": "cli/init.js"
   },
-  "types": "index.d.ts",
   "files": [
     "cli",
     "*.js"
   ],
   "devDependencies": {
-    "padua": "^0.2.5"
+    "padua": "^0.3.7"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {

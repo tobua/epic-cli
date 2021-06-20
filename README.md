@@ -44,6 +44,12 @@ format
 
 Format `package.json` in current folder.
 
+```
+init [name]
+```
+
+Quickly initialize a new node project in the current folder using the parent folder as the default name. Alternative to `npm init`.
+
 ### without full installation (One-time use)
 
 ```

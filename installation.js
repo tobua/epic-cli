@@ -1,7 +1,7 @@
 import { readFileSync, realpathSync } from 'fs'
 import { join } from 'path'
 import { execSync } from 'child_process'
-import skip from 'skip-local-postinstall'
+import { skip } from 'skip-local-postinstall'
 
 skip()
 
