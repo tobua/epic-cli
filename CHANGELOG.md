@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/tobua/epic-cli/compare/v1.4.0...v1.5.0) (2021-06-20)
+
+
+### Features
+
+* **scripts:** add init script with optional name ([be7352e](https://github.com/tobua/epic-cli/commit/be7352eb5f075b30e8255e13571db84c8dacc4bf))
+
 ## [1.4.0](https://github.com/tobua/epic-cli/compare/v1.3.1...v1.4.0) (2021-02-26)
 
 
