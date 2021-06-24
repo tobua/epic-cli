@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/tobua/epic-cli/compare/v1.5.0...v1.6.0) (2021-06-24)
+
+
+### Features
+
+* **scripts:** add files script to list nested file structure ([3ae447b](https://github.com/tobua/epic-cli/commit/3ae447b6daa865461ecc1c8b994fb42820e7f1cb))
+
+
+### Bug Fixes
+
+* **init:** cwd is already a folder take the basename directly ([904b496](https://github.com/tobua/epic-cli/commit/904b4962c4af438a55a1a077803632d5d6db23e3))
+
 ## [1.5.0](https://github.com/tobua/epic-cli/compare/v1.4.0...v1.5.0) (2021-06-20)
 
 

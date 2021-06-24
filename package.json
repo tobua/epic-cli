@@ -1,7 +1,7 @@
 {
   "name": "epic-cli",
   "description": "Commands useful for everyday web development with node.",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "repository": "github:tobua/epic-cli",
   "license": "MIT",
   "author": "Matthias Giger",
@@ -23,13 +23,13 @@
   "type": "module",
   "main": "index.js",
   "bin": {
+    "files": "cli/files.js",
     "format": "cli/format.js",
     "global": "cli/global.js",
     "init": "cli/init.js",
     "refresh": "cli/refresh.js",
     "update": "cli/update.js",
-    "version": "cli/version.js",
-    "files": "cli/files.js"
+    "version": "cli/version.js"
   },
   "files": [
     "cli",
