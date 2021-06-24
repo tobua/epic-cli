@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { writeFileSync } from 'fs'
 import { userInfo } from 'os'
-import { join, dirname, basename } from 'path'
+import { join, basename } from 'path'
 import formatPackageJson from 'pakag'
 import validate from 'validate-npm-package-name'
 
@@ -9,7 +9,7 @@ let name = process.argv.slice(2)[0]
 
 // If no name is defined, use containing folder.
 if (!name) {
-  name = basename(dirname(process.cwd()))
+  name = basename(process.cwd())
   name = name.toLowerCase().replace(' ', '-')
 } else if (!validate(name).validForNewPackages) {
   console.error(`Package name ${name} not valid for npm packages.`)
