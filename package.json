@@ -17,6 +17,7 @@
     "pakag": "^2.5.0",
     "rimraf": "^3.0.2",
     "skip-local-postinstall": "^2.0.2",
+    "tree-node-cli": "^1.4.0",
     "validate-npm-package-name": "^3.0.0"
   },
   "type": "module",
@@ -27,7 +28,8 @@
     "init": "cli/init.js",
     "refresh": "cli/refresh.js",
     "update": "cli/update.js",
-    "version": "cli/version.js"
+    "version": "cli/version.js",
+    "files": "cli/files.js"
   },
   "files": [
     "cli",
