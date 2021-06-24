@@ -10,6 +10,8 @@ Useful commands for everyday Web Development.
 
 ```
 [sudo] npm install -g epic-cli
+# or for one-time use
+npx -p epic-cli -y update
 ```
 
 ## Usage
@@ -50,8 +52,8 @@ init [name]
 
 Quickly initialize a new node project in the current folder using the parent folder as the default name. Alternative to `npm init`.
 
-### without full installation (One-time use)
+```
+files
+```
 
-```
-npx -p epic-cli update
-```
+List nested files inside current folder in a tree structure.

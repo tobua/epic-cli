@@ -21,7 +21,6 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "type": "module",
-  "main": "index.js",
   "bin": {
     "files": "cli/files.js",
     "format": "cli/format.js",
