@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/tobua/epic-cli/compare/v1.6.0...v1.6.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* **update:** increase update timeout to two minutes ([158b400](https://github.com/tobua/epic-cli/commit/158b400bd7cc0faf84bfc8d24d5815655b022e57))
+
 ## [1.6.0](https://github.com/tobua/epic-cli/compare/v1.5.0...v1.6.0) (2021-06-24)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "epic-cli",
   "description": "Commands useful for everyday web development with node.",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "repository": "github:tobua/epic-cli",
   "license": "MIT",
   "author": "Matthias Giger",
@@ -21,6 +21,9 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "type": "module",
+  "exports": {
+    "default": "./cli/update.js"
+  },
   "bin": {
     "files": "cli/files.js",
     "format": "cli/format.js",
@@ -33,6 +36,11 @@
   "files": [
     "cli",
     "*.js"
+  ],
+  "keywords": [
+    "cli",
+    "everyday",
+    "node"
   ],
   "devDependencies": {
     "padua": "^0.3.14"
