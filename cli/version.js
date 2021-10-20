@@ -6,7 +6,7 @@ const npmVersion = execSync('npm -v')
   .toString()
   // Remove newlines.
   .replace(/(\r\n|\n|\r)/gm, '')
-const latestNpmVersion = await latestVersion('npm', { version: 'next' })
+const latestNpmVersion = await latestVersion('npm', { version: 'latest' })
 
 console.log(`node: ${process.versions.node}`)
 console.log(`npm: ${npmVersion} [${latestNpmVersion}]`)

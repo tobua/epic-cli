@@ -12,8 +12,8 @@
     "source": true
   },
   "dependencies": {
-    "latest-version": "^5.1.0",
-    "npm-check-updates": "^11.7.1",
+    "latest-version": "^6.0.0",
+    "npm-check-updates": "^11.8.5",
     "pakag": "^2.5.0",
     "rimraf": "^3.0.2",
     "skip-local-postinstall": "^2.0.2",
@@ -35,7 +35,7 @@
     "*.js"
   ],
   "devDependencies": {
-    "padua": "^0.3.7"
+    "padua": "^0.3.14"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {

@@ -8,4 +8,6 @@ await update.run({
   silent: false,
   // Use regular formatter, not JSON.
   jsonUpgraded: false,
+  // Increase timeout from default 30 seconds to 2 minutes.
+  timeout: 120000,
 })
