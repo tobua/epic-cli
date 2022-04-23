@@ -14,25 +14,33 @@ Useful commands for everyday Web Development.
 npx -p epic-cli -y update
 ```
 
-## Usage
+## Commands
 
-```
-refresh
-```
-
-Reinstalls node modules in current directory.
-
-```
-version
-```
-
-Check if node and npm are up-to-date.
+After the installation the following commands can be used from anywhere within the terminal.
 
 ```
 update
 ```
 
 Update current package versions to their latest release.
+
+```
+refresh
+```
+
+Reinstalls node modules in current directory, first removing the lock file.
+
+```
+init [name]
+```
+
+Quickly initialize a new node project in the current folder using the parent folder as the default name. Alternative to `npm init`.
+
+```
+version
+```
+
+Check if node and npm are up-to-date.
 
 ```
 global
@@ -47,13 +55,13 @@ format
 Format `package.json` in current folder.
 
 ```
-init [name]
-```
-
-Quickly initialize a new node project in the current folder using the parent folder as the default name. Alternative to `npm init`.
-
-```
 files
 ```
 
 List nested files inside current folder in a tree structure.
+
+```
+ios
+```
+
+Runs a React Native app in the iOS simulator as an iPhone 11 which uses significantly less resources compared to running the current version. Useful with Intel based Macs. Alias for `npx react-native run-ios --simulator="iPhone 11"`.

@@ -1,0 +1,15 @@
+name: push
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-demo-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: 📢 Release
+        uses: tobua/release-npm-action@v1
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

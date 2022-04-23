@@ -9,9 +9,7 @@ skip()
 let scripts = []
 
 try {
-  scripts = Object.keys(
-    JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8')).bin
-  )
+  scripts = Object.keys(JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8')).bin)
 } catch (error) {
   // Optional check, ignore errors.
 }

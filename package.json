@@ -1,7 +1,7 @@
 {
   "name": "epic-cli",
   "description": "Commands useful for everyday web development with node.",
-  "version": "1.6.1",
+  "version": "0.0.0-development",
   "repository": "github:tobua/epic-cli",
   "license": "MIT",
   "author": "Matthias Giger",
@@ -13,22 +13,20 @@
   },
   "dependencies": {
     "latest-version": "^6.0.0",
-    "npm-check-updates": "^11.8.5",
-    "pakag": "^2.5.0",
+    "npm-check-updates": "^12.5.9",
+    "pakag": "^2.6.0",
     "rimraf": "^3.0.2",
-    "skip-local-postinstall": "^2.0.2",
-    "tree-node-cli": "^1.4.0",
-    "validate-npm-package-name": "^3.0.0"
+    "skip-local-postinstall": "^2.0.3",
+    "tree-node-cli": "^1.5.2",
+    "validate-npm-package-name": "^4.0.0"
   },
   "type": "module",
-  "exports": {
-    "default": "./cli/update.js"
-  },
   "bin": {
     "files": "cli/files.js",
     "format": "cli/format.js",
     "global": "cli/global.js",
     "init": "cli/init.js",
+    "ios": "cli/ios.js",
     "refresh": "cli/refresh.js",
     "update": "cli/update.js",
     "version": "cli/version.js"
@@ -43,7 +41,7 @@
     "node"
   ],
   "devDependencies": {
-    "padua": "^0.3.14"
+    "padua": "^0.5.6"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
