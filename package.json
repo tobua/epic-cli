@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "latest-version": "^6.0.0",
-    "npm-check-updates": "^12.5.9",
+    "npm-check-updates": "^12.5.11",
     "pakag": "^2.6.0",
     "rimraf": "^3.0.2",
     "skip-local-postinstall": "^2.0.3",

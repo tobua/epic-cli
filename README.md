@@ -28,7 +28,7 @@ Update current package versions to their latest release.
 refresh
 ```
 
-Reinstalls node modules in current directory, first removing the lock file.
+Reinstalls node modules in current directory. Add `--lock` flag to also remove the `package-lock.json` file first.
 
 ```
 init [name]

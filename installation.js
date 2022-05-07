@@ -15,17 +15,16 @@ try {
 }
 
 scripts.forEach((script) => {
-  let failed = false
+  let scriptAlreadyExists = false
   let output = ''
 
   try {
     output = execSync(`type ${script}`).toString()
   } catch (error) {
-    console.log('failed script')
-    failed = true
+    scriptAlreadyExists = true
   }
 
-  if (!failed) {
+  if (scriptAlreadyExists) {
     // Ignore if command comes from previously installed plugin.
     const path = realpathSync(output.match(/.*\sis\s(.*)/)[1])
 

@@ -10,4 +10,6 @@ await update.run({
   silent: false,
   // Use regular formatter, not JSON.
   jsonUpgraded: false,
+  // Also upgrade peerDependencies.
+  dep: 'prod,dev,bundle,optional,peer'
 })
