@@ -12,13 +12,13 @@
     "source": true
   },
   "dependencies": {
-    "latest-version": "^6.0.0",
-    "npm-check-updates": "^12.5.11",
-    "pakag": "^2.6.0",
-    "rimraf": "^3.0.2",
-    "skip-local-postinstall": "^2.0.3",
-    "tree-node-cli": "^1.5.2",
-    "validate-npm-package-name": "^4.0.0"
+    "latest-version": "^7.0.0",
+    "npm-check-updates": "^16.7.12",
+    "pakag": "^2.7.0",
+    "rimraf": "^4.4.0",
+    "skip-local-postinstall": "^2.0.4",
+    "tree-node-cli": "^1.6.0",
+    "validate-npm-package-name": "^5.0.0"
   },
   "type": "module",
   "bin": {
@@ -41,7 +41,7 @@
     "node"
   ],
   "devDependencies": {
-    "padua": "^0.5.6"
+    "padua": "^1.1.0"
   },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
@@ -54,6 +54,6 @@
     }
   },
   "engines": {
-    "node": ">= 14"
+    "node": ">= 16"
   }
 }
