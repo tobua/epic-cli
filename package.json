@@ -26,7 +26,6 @@
     "format": "cli/format.js",
     "global": "cli/global.js",
     "init": "cli/init.js",
-    "ios": "cli/ios.js",
     "refresh": "cli/refresh.js",
     "update": "cli/update.js",
     "version": "cli/version.js"

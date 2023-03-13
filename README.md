@@ -59,9 +59,3 @@ files
 ```
 
 List nested files inside current folder in a tree structure.
-
-```
-ios
-```
-
-Runs a React Native app in the iOS simulator as an iPhone 11 which uses significantly less resources compared to running the current version. Useful with Intel based Macs. Alias for `npx react-native run-ios --simulator="iPhone 11"`.
