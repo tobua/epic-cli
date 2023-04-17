@@ -59,3 +59,9 @@ files
 ```
 
 List nested files inside current folder in a tree structure.
+
+```
+workspaces "update"
+```
+
+Run an arbitrary command passed as the second argument in every workspace of the current project. Use the `--output` flag to show the output when running the command.
