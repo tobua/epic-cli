@@ -16,7 +16,6 @@
     "latest-version": "^7.0.0",
     "npm-check-updates": "^16.10.8",
     "pakag": "^2.8.0",
-    "rimraf": "^5.0.0",
     "skip-local-postinstall": "^2.0.4",
     "tree-node-cli": "^1.6.0",
     "validate-npm-package-name": "^5.0.0"

@@ -1,14 +1,18 @@
 #!/usr/bin/env node
+import { existsSync, rmSync } from 'fs'
 import { join } from 'path'
-import rimraf from 'rimraf'
 import { execSync } from 'child_process'
 
-const options = process.argv.splice(2)
+const modulesPath = join(process.cwd(), 'node_modules')
 
-rimraf.sync(join(process.cwd(), 'node_modules'))
+if (existsSync(modulesPath)) {
+  rmSync(modulesPath, { recursive: true })
+}
 
-if (options.includes('--lock')) {
-  rimraf.sync(join(process.cwd(), 'package-lock.json'))
+const lockFilePath = join(process.cwd(), 'package-lock.json')
+
+if (process.argv.includes('--lock') && existsSync(lockFilePath)) {
+  rmSync(lockFilePath)
 }
 
 execSync('npm install --legacy-peer-deps', { stdio: 'inherit' })
