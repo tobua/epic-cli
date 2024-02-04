@@ -7,7 +7,7 @@ export const isBun = typeof Bun !== 'undefined'
 export function getScripts() {
   // Warning if any of the available scripts collides with alreay existing command.
   let scripts = []
-
+  console.log('cwd in', process.cwd())
   try {
     scripts = Object.keys(
       JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8')).bin,

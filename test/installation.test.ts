@@ -2,6 +2,7 @@ import { test, expect } from 'bun:test'
 import { getScripts, scriptExists } from '../helper'
 
 test('Scripts are listed.', () => {
+  console.log('cwd', process.cwd())
   expect(getScripts()).toContain('update')
   expect(getScripts()).toContain('refresh')
 })
