@@ -1,15 +1,22 @@
-import { test, expect, beforeEach, afterEach } from 'bun:test'
-import { existsSync, readFileSync, writeFileSync, rmSync } from 'fs'
-import { join } from 'path'
+import { test, expect, beforeEach, afterEach, beforeAll } from 'bun:test'
+import { existsSync, readFileSync, writeFileSync, rmSync, mkdirSync } from 'fs'
+import { join, dirname } from 'path'
 import { homedir } from 'os'
 import { execSync } from 'child_process'
-
-console.log(process.cwd())
 
 const configurationPath = join(
   homedir(),
   'Library/Mobile Documents/com~apple~CloudDocs/Documents/.env-variables',
 )
+
+// Create iCloud store mock in CI.
+beforeAll(() => {
+  if (process.env.CI) {
+    mkdirSync(dirname(configurationPath), {
+      recursive: true,
+    })
+  }
+})
 
 let initialContents = ''
 beforeEach(() => {
@@ -27,8 +34,6 @@ afterEach(() => {
 
 test('Creates configuration file if none is found.', () => {
   expect(existsSync(configurationPath)).toBe(false)
-
-  console.log(process.cwd())
 
   const output = execSync('bun cli/secret.ts', {
     cwd: '.',
