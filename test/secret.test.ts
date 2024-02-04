@@ -4,6 +4,8 @@ import { join } from 'path'
 import { homedir } from 'os'
 import { execSync } from 'child_process'
 
+console.log(process.cwd())
+
 const configurationPath = join(
   homedir(),
   'Library/Mobile Documents/com~apple~CloudDocs/Documents/.env-variables',
@@ -26,7 +28,10 @@ afterEach(() => {
 test('Creates configuration file if none is found.', () => {
   expect(existsSync(configurationPath)).toBe(false)
 
-  const output = execSync('bun ./cli/secret.ts', {
+  console.log(process.cwd())
+
+  const output = execSync('bun cli/secret.ts', {
+    cwd: '.',
     stdio: 'pipe',
   }).toString()
 
@@ -46,7 +51,7 @@ another-project:
 MY_KEY=567`
 
 test('Can parse existing configuration.', () => {
-  const epicLanguagePath = join(process.cwd(), 'test/fixture/secret/epic-language')
+  const epicLanguagePath = './test/fixture/secret/epic-language'
   writeFileSync(configurationPath, exampleContents)
 
   const output = execSync('bun ../../../../cli/secret.ts', {
@@ -58,7 +63,7 @@ test('Can parse existing configuration.', () => {
 })
 
 test('Can parse existing dotenv.', () => {
-  const anotherProjectPath = join(process.cwd(), 'test/fixture/secret/another-project')
+  const anotherProjectPath = './test/fixture/secret/another-project'
   // writeFileSync(configurationPath, exampleContents)
 
   execSync('bun ../../../../cli/secret.ts', {
@@ -79,7 +84,7 @@ test('Can parse existing dotenv.', () => {
 })
 
 test('Can restore dotenv from store.', () => {
-  const epicLanguagePath = join(process.cwd(), 'test/fixture/secret/epic-language')
+  const epicLanguagePath = './test/fixture/secret/epic-language'
   writeFileSync(configurationPath, exampleContents)
 
   execSync('bun ../../../../cli/secret.ts', {
@@ -103,7 +108,7 @@ another-project:
 MY_KEY=123`
 
 test('Will add new dotenv variables to store.', () => {
-  const anotherProjectPath = join(process.cwd(), 'test/fixture/secret/another-project')
+  const anotherProjectPath = './test/fixture/secret/another-project'
   writeFileSync(configurationPath, overrideContents)
 
   execSync('bun ../../../../cli/secret.ts', {
