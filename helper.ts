@@ -1,4 +1,4 @@
-import { readFileSync, realpathSync } from 'fs'
+import { readFileSync, realpathSync, existsSync } from 'fs'
 import { join } from 'path'
 import { execSync } from 'child_process'
 
@@ -9,10 +9,12 @@ export function getScripts() {
   let scripts = []
   console.log('cwd in', process.cwd())
   try {
+    console.log('exists', existsSync(join(process.cwd(), 'package.json')))
     scripts = Object.keys(
       JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf-8')).bin,
     )
   } catch (error) {
+    console.log(error)
     // Optional check, ignore errors.
   }
 
