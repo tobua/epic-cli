@@ -6,54 +6,63 @@
   "license": "MIT",
   "author": "Matthias Giger",
   "scripts": {
-    "postinstall": "node ./installation.js"
+    "build": "padua build",
+    "postinstall": "skip-local-postinstall ./dist/installation.js"
   },
   "padua": {
-    "source": true
+    "entry": [
+      "installation.ts",
+      "cli/*.ts"
+    ],
+    "esbuild": {
+      "platform": "node",
+      "format": "esm",
+      "target": "esnext",
+      "sourcemap": false
+    }
   },
   "dependencies": {
-    "@npmcli/map-workspaces": "^3.0.3",
-    "latest-version": "^7.0.0",
-    "npm-check-updates": "^16.10.8",
-    "pakag": "^2.8.0",
+    "@npmcli/map-workspaces": "^3.0.4",
+    "latest-version": "^8.0.0",
+    "npm-check-updates": "^16.14.14",
+    "pakag": "^3.1.1",
     "skip-local-postinstall": "^2.0.4",
     "tree-node-cli": "^1.6.0",
     "validate-npm-package-name": "^5.0.0"
   },
+  "devDependencies": {
+    "@types/bun": "^1.0.4",
+    "@types/npmcli__map-workspaces": "^3.0.4",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "padua": "^2.0.9"
+  },
   "type": "module",
   "bin": {
-    "files": "cli/files.js",
-    "format": "cli/format.js",
-    "global": "cli/global.js",
-    "init": "cli/init.js",
-    "refresh": "cli/refresh.js",
-    "update": "cli/update.js",
-    "version": "cli/version.js",
-    "workspaces": "cli/workspaces.js"
+    "files": "./dist/cli/files.js",
+    "format": "./dist/cli/format.js",
+    "global": "./dist/cli/global.js",
+    "init": "./dist/cli/init.js",
+    "refresh": "./dist/cli/refresh.js",
+    "secret": "./dist/cli/secret.js",
+    "update": "./dist/cli/update.js",
+    "verify": "./dist/installation.js",
+    "version": "./dist/cli/version.js",
+    "workspaces": "./dist/cli/workspaces.js"
   },
   "files": [
-    "cli",
-    "*.js"
+    "dist"
   ],
   "keywords": [
     "cli",
     "everyday",
     "node"
   ],
-  "devDependencies": {
-    "padua": "^1.2.2"
-  },
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
-    "extends": "./node_modules/padua/configuration/eslint.cjs",
-    "rules": {
-      "import/extensions": [
-        2,
-        "ignorePackages"
-      ]
+    "extends": "./node_modules/padua/configuration/eslint.cjs"
     }
   },
   "engines": {
-    "node": ">= 16"
+    "node": ">= 18"
   }
 }

@@ -6,12 +6,17 @@
 
 Useful commands for everyday Web Development.
 
-## Installation
+## Installation with Node.js or Bun
 
-```
+```sh
 [sudo] npm install -g epic-cli
 # or for one-time use
 npx -p epic-cli -y update
+```
+
+```sh
+bun install -g epic-cli
+bunx epic-cli update # One-time use
 ```
 
 ## Commands
@@ -35,6 +40,12 @@ init [name]
 ```
 
 Quickly initialize a new node project in the current folder using the parent folder as the default name. Alternative to `npm init`.
+
+```
+secret
+```
+
+Stores and retreives `.env` variables for the current project from iCloud on macOS.
 
 ```
 version

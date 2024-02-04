@@ -2,6 +2,7 @@
 import { existsSync, rmSync } from 'fs'
 import { join } from 'path'
 import { execSync } from 'child_process'
+import { isBun } from '../helper'
 
 const modulesPath = join(process.cwd(), 'node_modules')
 
@@ -9,10 +10,14 @@ if (existsSync(modulesPath)) {
   rmSync(modulesPath, { recursive: true })
 }
 
-const lockFilePath = join(process.cwd(), 'package-lock.json')
+const lockFilePath = join(process.cwd(), isBun ? 'bun.lockb' : 'package-lock.json')
 
 if (process.argv.includes('--lock') && existsSync(lockFilePath)) {
   rmSync(lockFilePath)
 }
 
-execSync('npm install --legacy-peer-deps', { stdio: 'inherit' })
+if (isBun) {
+  execSync('bun install', { stdio: 'inherit' })
+} else {
+  execSync('npm install --legacy-peer-deps', { stdio: 'inherit' })
+}

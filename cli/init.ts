@@ -24,6 +24,7 @@ const pkg = {
 }
 
 const packageJsonPath = join(process.cwd(), 'package.json')
+// @ts-ignore
 const formattedContents = formatPackageJson(JSON.stringify(pkg))
 
 writeFileSync(packageJsonPath, formattedContents)

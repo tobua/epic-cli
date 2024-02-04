@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import update from 'npm-check-updates'
+import { execSync } from 'child_process'
+import { isBun } from '../helper'
 
-await update.run({
+const updatedDependencies = await update({
   // Directly write new versions to package.json.
   upgrade: true,
   // Verbose.
@@ -11,3 +13,7 @@ await update.run({
   // Increase timeout from default 30 seconds to 2 minutes.
   timeout: 120000,
 })
+
+if (isBun && updatedDependencies && Object.keys(updatedDependencies).length) {
+  execSync('bun update', { stdio: 'inherit' })
+}
