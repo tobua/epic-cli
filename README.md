@@ -16,7 +16,7 @@ npx -p epic-cli -y update
 
 ```sh
 bun install -g epic-cli
-bunx epic-cli update # One-time use
+bunx epic-cli update # One-time use TODO doesn't work!
 ```
 
 ## Commands

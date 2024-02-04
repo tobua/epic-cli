@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import update from 'npm-check-updates'
+import { run } from 'npm-check-updates'
 import { execSync } from 'child_process'
 import { isBun } from '../helper'
 
-const updatedDependencies = await update({
+const updatedDependencies = await run({
   // Directly write new versions to package.json.
   upgrade: true,
   // Verbose.

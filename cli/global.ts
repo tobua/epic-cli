@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execSync } from 'child_process'
-import update from 'npm-check-updates'
+import { run } from 'npm-check-updates'
 import { isBun } from '../helper'
 
 if (isBun) {
@@ -9,7 +9,7 @@ if (isBun) {
   execSync('npm list -g --depth=0', { stdio: 'inherit' })
 }
 
-await update({
+await run({
   global: true,
   // Verbose.
   silent: false,
