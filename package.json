@@ -60,7 +60,6 @@
   "prettier": "padua/configuration/.prettierrc.json",
   "eslintConfig": {
     "extends": "./node_modules/padua/configuration/eslint.cjs"
-    }
   },
   "engines": {
     "node": ">= 18"
