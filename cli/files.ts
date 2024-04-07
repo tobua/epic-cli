@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 import tree from 'tree-node-cli'
 
 const files = tree(process.cwd(), {

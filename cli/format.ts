@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import formatPackageJson from 'pakag'

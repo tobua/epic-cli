@@ -6,13 +6,7 @@
 
 Useful commands for everyday Web Development.
 
-## Installation with Node.js or Bun
-
-```sh
-[sudo] npm install -g epic-cli
-# or for one-time use
-npx -p epic-cli -y update
-```
+## Installation
 
 ```sh
 bun install -g epic-cli
@@ -33,25 +27,19 @@ Update current package versions to their latest release.
 refresh
 ```
 
-Reinstalls node modules in current directory. Add `--lock` flag to also remove the `package-lock.json` file first.
+Reinstalls node_modules in current directory. Add `--lock` flag to also remove the `package-lock.json` file first.
 
 ```
 init [name]
 ```
 
-Quickly initialize a new node project in the current folder using the parent folder as the default name. Alternative to `npm init`.
+Quickly initialize a new project in the current folder using the parent folder as the default name.
 
 ```
 secret
 ```
 
-Stores and retreives `.env` variables for the current project from iCloud on macOS.
-
-```
-version
-```
-
-Check if node and npm are up-to-date.
+Stores and retreives `.env` variables for the current project from iCloud on macOS. Run `secret list` to show all currently stored secrets.
 
 ```
 global

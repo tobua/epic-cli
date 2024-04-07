@@ -2,8 +2,6 @@ import { readFileSync, realpathSync } from 'fs'
 import { join } from 'path'
 import { execSync } from 'child_process'
 
-export const isBun = typeof Bun !== 'undefined'
-
 export function getScripts() {
   // Warning if any of the available scripts collides with alreay existing command.
   let scripts = []

@@ -1,20 +1,14 @@
-#!/usr/bin/env node
-import { execSync } from 'child_process'
-import { run } from 'npm-check-updates'
-import { isBun } from '../helper'
+#!/usr/bin/env bun
+import { $ } from 'bun'
 
-if (isBun) {
-  execSync('bun pm ls -g', { stdio: 'inherit' })
-} else {
-  execSync('npm list -g --depth=0', { stdio: 'inherit' })
+console.log('Globally installed packages:')
+
+const { exitCode } = await $`bun pm ls -g`.nothrow()
+
+if (exitCode === 1) {
+    console.log('No global packages installed.')
 }
 
-await run({
-  global: true,
-  // Verbose.
-  silent: false,
-  // Use regular formatter, not JSON.
-  jsonUpgraded: false,
-  // Also upgrade peerDependencies.
-  dep: 'prod,dev,bundle,optional,peer',
-})
+console.log('Updating globally installed packages...')
+
+await $`bun update -g`.nothrow()

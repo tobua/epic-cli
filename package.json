@@ -23,21 +23,24 @@
   },
   "dependencies": {
     "@npmcli/map-workspaces": "^3.0.4",
-    "latest-version": "^8.0.0",
-    "npm-check-updates": "^16.14.14",
-    "pakag": "^3.1.1",
+    "pakag": "^3.1.3",
+    "semver": "^7.6.0",
     "skip-local-postinstall": "^2.0.4",
     "tree-node-cli": "^1.6.0",
     "validate-npm-package-name": "^5.0.0"
   },
   "devDependencies": {
-    "@types/bun": "^1.0.4",
+    "@types/bun": "^1.0.12",
     "@types/npmcli__map-workspaces": "^3.0.4",
     "@types/validate-npm-package-name": "^4.0.2",
-    "padua": "^2.0.9"
+    "padua": "^4.0.1"
   },
+  "trustedDependencies": [
+    "padua"
+  ],
   "type": "module",
   "bin": {
+    "epic-cli": "./dist/cli/update.js",
     "files": "./dist/cli/files.js",
     "format": "./dist/cli/format.js",
     "global": "./dist/cli/global.js",
@@ -46,7 +49,6 @@
     "secret": "./dist/cli/secret.js",
     "update": "./dist/cli/update.js",
     "verify": "./dist/installation.js",
-    "version": "./dist/cli/version.js",
     "workspaces": "./dist/cli/workspaces.js"
   },
   "files": [
@@ -63,8 +65,5 @@
   },
   "publishConfig": {
     "provenance": true
-  },
-  "engines": {
-    "node": ">= 18"
   }
 }

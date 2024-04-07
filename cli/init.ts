@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 import { writeFileSync } from 'fs'
 import { userInfo } from 'os'
 import { join, basename } from 'path'

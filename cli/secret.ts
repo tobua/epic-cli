@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /* eslint-disable no-continue,no-restricted-syntax */
 import { existsSync, writeFileSync, readFileSync } from 'fs'
 import { join, basename, dirname } from 'path'
@@ -98,6 +98,11 @@ if (existsSync(configurationPath)) {
   console.log(`Configuration file created in iCloud » Documents » ${configurationFile}`)
   const emptyTemplate = createConfigurationTemplate()
   writeFileSync(configurationPath, emptyTemplate)
+}
+
+if (process.argv.includes('list')) {
+  console.log(configuration)
+  process.exit(0)
 }
 
 if (!configuration[projectName]) {
