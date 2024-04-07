@@ -18,7 +18,10 @@
       "platform": "node",
       "format": "esm",
       "target": "esnext",
-      "sourcemap": false
+      "sourcemap": false,
+      "external": [
+        "bun"
+      ]
     }
   },
   "dependencies": {
