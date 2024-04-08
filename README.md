@@ -21,7 +21,7 @@ After the installation the following commands can be used from anywhere within t
 update
 ```
 
-Update current package versions to their latest release.
+Update current package dependency versions. This will update all versions with ranges to the latest version. Exactly specified versions or dist tags will be ignored.
 
 ```
 refresh
