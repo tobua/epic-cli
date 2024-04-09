@@ -2,7 +2,8 @@
 import { execSync } from 'child_process'
 import { neq, valid } from 'semver'
 
-let updatedDependencies = 0
+const updatedDependencies: { name: string; previous: string; latest: string }[] = []
+let processedDependencies = 0
 const versionRangeRegex = /(\^|~|>=|>|<=|<)?\d+(\.\d+){0,2}(\.\*)?/
 const packageJson = await Bun.file('./package.json').json()
 const dependencyTypes = [
@@ -18,39 +19,54 @@ const dependencyCount = dependencyTypes.reduce(
   0,
 )
 
-console.log(`Updating ${dependencyCount} dependencies...`)
+if (dependencyCount === 0) {
+  console.log('No dependencies found.')
+  process.exit(0)
+}
+
+process.stdout.write(`Updating ${dependencyCount} dependencies...\r`)
 
 await Promise.all(
   dependencyTypes.map(async (type) => {
     const dependencies = packageJson[type] as { [key: string]: string }
+    if (!dependencies) return
 
-    // eslint-disable-next-line no-restricted-syntax, guard-for-in
-    for (const dependency in dependencies) {
-      const name = dependency
-      const previousVersionRange = dependencies[dependency]
+    const fetchPromises = Object.keys(dependencies).map(async (name) => {
+      const previousVersionRange = dependencies[name]
       const previousVersion = previousVersionRange.replace(/^(\^|~|>=|>|<=|<)/, '')
-      // eslint-disable-next-line no-continue
-      if (!valid(previousVersion)) continue // Ignore invalid versions
+      if (!valid(previousVersion)) return // Ignore invalid versions
       const versionRangeMatch = previousVersionRange.match(versionRangeRegex)
-      // eslint-disable-next-line no-continue
-      if (!versionRangeMatch) continue // Keep exact versions as they are
+      if (!versionRangeMatch) return // Keep exact versions as they are
       const versionRange = versionRangeMatch ? versionRangeMatch[1] : null
 
-      // eslint-disable-next-line no-await-in-loop
       const { version } = await (await fetch(`https://registry.npmjs.org/${name}/latest`)).json()
 
       if (version && neq(version, previousVersion)) {
-        dependencies[dependency] = `${versionRange || ''}${version}`
-        updatedDependencies += 1
+        dependencies[name] = `${versionRange || ''}${version}`
+        updatedDependencies.push({
+          name,
+          previous: previousVersionRange,
+          latest: `${versionRange || ''}${version}`,
+        })
       }
-    }
+
+      processedDependencies += 1
+      process.stdout.write(`Updating ${processedDependencies}/${dependencyCount} dependencies...\r`)
+    })
+
+    await Promise.all(fetchPromises)
   }),
 )
 
-if (updatedDependencies !== 0) {
-  console.log(`${updatedDependencies} dependencies updated.`)
+process.stdout.write('\r\x1b[K') // Clear progress output.
+
+if (updatedDependencies.length !== 0) {
+  console.log(`${updatedDependencies.length} dependencies updated.`)
+  updatedDependencies.forEach((update) => {
+    console.log(`\u001b[1m${update.name}\u001b[0m ${update.previous} ➜ ${update.latest}`)
+  })
   Bun.write('./package.json', `${JSON.stringify(packageJson, null, 2)}\n`)
-  console.log('Updating dependencies...')
+  console.log('Installing new dependencies with Bun.')
   // Using bun shell here will not exit in tests...
   execSync('bun update', {
     stdio: 'inherit',

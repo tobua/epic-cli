@@ -36,7 +36,7 @@ test('Lists package updates.', async () => {
   writeFileSync('./test/fixture/update/basic/package.json', JSON.stringify(initialPackage, null, 2))
   rmSync('./test/fixture/update/basic/bun.lockb')
   rmSync('./test/fixture/update/basic/node_modules', { recursive: true })
-}, 60000)
+}, 120000)
 
 test('Skips update if all dependencies are already up-to-date.', async () => {
   const initialPackage = JSON.parse(

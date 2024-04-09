@@ -43,7 +43,7 @@
   ],
   "type": "module",
   "bin": {
-    "epic-cli": "./dist/cli/update.js",
+    "epic-cli": "./dist/cli/x.js",
     "files": "./dist/cli/files.js",
     "format": "./dist/cli/format.js",
     "global": "./dist/cli/global.js",
