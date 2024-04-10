@@ -21,6 +21,7 @@
     "@biomejs/biome": "^1.6.4",
     "@types/bun": "^1.0.12",
     "@types/npmcli__map-workspaces": "^3.0.4",
+    "@types/semver": "^7.5.8",
     "@types/validate-npm-package-name": "^4.0.2",
     "typescript": "^5.4.5"
   },
