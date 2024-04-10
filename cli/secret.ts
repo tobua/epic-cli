@@ -1,18 +1,14 @@
 #!/usr/bin/env bun
 /* eslint-disable no-continue,no-restricted-syntax */
-import { existsSync, writeFileSync, readFileSync } from 'fs'
-import { join, basename, dirname } from 'path'
-import { homedir } from 'os'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { homedir } from 'node:os'
+import { basename, dirname, join } from 'node:path'
 
 const configurationFile = '.env-variables'
-const configurationPath = join(
-  homedir(),
-  'Library/Mobile Documents/com~apple~CloudDocs/Documents',
-  configurationFile,
-)
+const configurationPath = join(homedir(), 'Library/Mobile Documents/com~apple~CloudDocs/Documents', configurationFile)
 
 if (!existsSync(dirname(configurationPath))) {
-  console.log(`Cannot find iCloud folder, make sure to enable synchronization.`)
+  console.log('Cannot find iCloud folder, make sure to enable synchronization.')
   process.exit(1)
 }
 
@@ -26,7 +22,7 @@ if (!projectName) {
 }
 
 function parseConfiguration(contents: string) {
-  let currentProject: string
+  let currentProject: string | undefined = undefined
 
   const lines = contents.split('\n')
 
@@ -46,7 +42,7 @@ function parseConfiguration(contents: string) {
     } else {
       // Parse key-value pairs for the current project
       const [key, value] = trimmedLine.split('=')
-      if (key && value) {
+      if (key && value && currentProject) {
         configuration[currentProject][key.trim()] = value.trim()
       }
     }
@@ -59,11 +55,11 @@ function createConfigurationTemplate() {
 
   projects.forEach(([project, keyValuePairs], index) => {
     lines += `${project}:\n\n`
-    Object.entries(keyValuePairs).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(keyValuePairs)) {
       lines += `${key}=${value}\n`
-    })
+    }
     if (index !== projects.length - 1) {
-      lines += `\n`
+      lines += '\n'
     }
   })
 
@@ -72,7 +68,7 @@ function createConfigurationTemplate() {
 
 function parseDotenvFile(content: string) {
   const lines = content.split('\n')
-  const parsedEnv = {}
+  const parsedEnv: { [key: string]: string } = {}
 
   // eslint-disable-next-line no-restricted-syntax
   for (const line of lines) {

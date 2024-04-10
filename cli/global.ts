@@ -6,7 +6,7 @@ console.log('Globally installed packages:')
 const { exitCode } = await $`bun pm ls -g`.nothrow()
 
 if (exitCode === 1) {
-    console.log('No global packages installed.')
+  console.log('No global packages installed.')
 }
 
 console.log('Updating globally installed packages...')

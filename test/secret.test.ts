@@ -1,13 +1,10 @@
-import { test, expect, beforeEach, afterEach, beforeAll } from 'bun:test'
-import { existsSync, readFileSync, writeFileSync, rmSync, mkdirSync } from 'fs'
-import { join, dirname } from 'path'
-import { homedir } from 'os'
-import { execSync } from 'child_process'
+import { afterEach, beforeAll, beforeEach, expect, test } from 'bun:test'
+import { execSync } from 'node:child_process'
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { homedir } from 'node:os'
+import { dirname, join } from 'node:path'
 
-const configurationPath = join(
-  homedir(),
-  'Library/Mobile Documents/com~apple~CloudDocs/Documents/.env-variables',
-)
+const configurationPath = join(homedir(), 'Library/Mobile Documents/com~apple~CloudDocs/Documents/.env-variables')
 
 // Create iCloud store mock in CI.
 beforeAll(() => {

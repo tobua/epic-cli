@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"lib": ["ESNext"],
+		"module": "Preserve",
+		"target": "ESNext",
+		"skipLibCheck": true
+	},
+	"include": ["cli/*"]
+}

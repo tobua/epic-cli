@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
-import { writeFileSync } from 'fs'
-import { userInfo } from 'os'
-import { join, basename } from 'path'
+import { writeFileSync } from 'node:fs'
+import { userInfo } from 'node:os'
+import { basename, join } from 'node:path'
 import formatPackageJson from 'pakag'
 import validate from 'validate-npm-package-name'
 

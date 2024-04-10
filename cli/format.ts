@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
-import { readFileSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import formatPackageJson from 'pakag'
 
 const packageJsonPath = join(process.cwd(), 'package.json')

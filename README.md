@@ -6,11 +6,20 @@
 
 Useful commands for everyday Web Development.
 
-## Installation
+## Usage or Global Installation
 
 ```sh
+bunx epic-cli update # One time usage to run any script.
+bunx epic-cli@latest update # Avoid using cached version.
+```
+
+For repeated usage it's best to install the package globally and use shortcut aliases.
+
+```sh
+bunx epic-cli verify # Verify which script aliases are free before installation.
 bun install -g epic-cli
-bunx epic-cli update # One-time use TODO doesn't work!
+update # Directly run any script.
+bun update -g epic-cli # Update globally installed version.
 ```
 
 ## Commands

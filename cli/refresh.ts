@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
-import { existsSync, rmSync } from 'fs'
+import { existsSync, rmSync } from 'node:fs'
+import { join } from 'node:path'
 import { $ } from 'bun'
-import { join } from 'path'
 
 const modulesPath = join(process.cwd(), 'node_modules')
 
