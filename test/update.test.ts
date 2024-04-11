@@ -24,6 +24,10 @@ test('Lists package updates.', () => {
   expect(modifiedPackage.dependencies.naven).toEqual('emotion')
   expect(modifiedPackage.dependencies['@rsbuild/core']).toContain('~')
   expect(gte(modifiedPackage.dependencies['@rsbuild/core'].replace('~', ''), '0.5.9')).toBe(true)
+  // devDependencies also updated.
+  expect(gte(modifiedPackage.devDependencies.immer.replace('~', ''), '10.0.4')).toBe(true)
+  // Ranges kept intact.
+  expect(modifiedPackage.peerDependencies.immutable).toEqual('>= 3.7')
 
   // bun update was run.
   expect(existsSync('./test/fixture/update/basic/bun.lockb')).toBe(true)

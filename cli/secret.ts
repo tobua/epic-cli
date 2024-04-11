@@ -96,7 +96,7 @@ if (existsSync(configurationPath)) {
   writeFileSync(configurationPath, emptyTemplate)
 }
 
-if (process.argv.includes('list')) {
+if (process.argv.includes('--list')) {
   console.log(configuration)
   process.exit(0)
 }

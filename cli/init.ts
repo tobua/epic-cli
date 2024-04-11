@@ -2,7 +2,7 @@
 import { writeFileSync } from 'node:fs'
 import { userInfo } from 'node:os'
 import { basename, join } from 'node:path'
-import formatPackageJson from 'pakag'
+import { formatPackageJson } from 'pakag'
 import validate from 'validate-npm-package-name'
 
 let name = process.argv.slice(2)[0]
@@ -24,7 +24,6 @@ const pkg = {
 }
 
 const packageJsonPath = join(process.cwd(), 'package.json')
-// @ts-ignore
-const formattedContents = formatPackageJson(JSON.stringify(pkg))
+const formattedContents = await formatPackageJson(JSON.stringify(pkg))
 
 writeFileSync(packageJsonPath, formattedContents)

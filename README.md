@@ -36,7 +36,7 @@ Update current package dependency versions. This will update all versions with r
 refresh
 ```
 
-Reinstalls node_modules in current directory. Add `--lock` flag to also remove the `package-lock.json` file first.
+Reinstalls node_modules in current directory. Add `--lock` flag to also remove the `bun.lockb` file first.
 
 ```
 init [name]
@@ -48,7 +48,7 @@ Quickly initialize a new project in the current folder using the parent folder a
 secret
 ```
 
-Stores and retreives `.env` variables for the current project from iCloud on macOS. Run `secret list` to show all currently stored secrets.
+Stores and retreives `.env` variables for the current project from iCloud on macOS. Add the `--list` flag to show all currently stored secrets.
 
 ```
 global

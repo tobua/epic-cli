@@ -5,6 +5,7 @@ import { homedir } from 'node:os'
 import { dirname, join } from 'node:path'
 
 const configurationPath = join(homedir(), 'Library/Mobile Documents/com~apple~CloudDocs/Documents/.env-variables')
+const localEnvFilePath = join(process.cwd(), '.env')
 
 // Create iCloud store mock in CI.
 beforeAll(() => {
@@ -26,6 +27,10 @@ beforeEach(() => {
 afterEach(() => {
   if (initialContents !== '') {
     writeFileSync(configurationPath, initialContents)
+  }
+
+  if (existsSync(localEnvFilePath)) {
+    rmSync(localEnvFilePath)
   }
 })
 
