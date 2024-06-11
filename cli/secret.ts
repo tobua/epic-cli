@@ -38,12 +38,15 @@ function parseConfiguration(contents: string) {
     const projectMatch = trimmedLine.match(/^([^:]+):$/)
     if (projectMatch) {
       ;[, currentProject] = projectMatch
-      configuration[currentProject] = {}
+      configuration[currentProject as string] = {}
     } else {
       // Parse key-value pairs for the current project
       const [key, value] = trimmedLine.split('=')
       if (key && value && currentProject) {
-        configuration[currentProject][key.trim()] = value.trim()
+        const current = configuration[currentProject]
+        if (current) {
+          current[key.trim()] = value.trim()
+        }
       }
     }
   }
@@ -110,7 +113,7 @@ const dotEnvPath = join(process.cwd(), '.env')
 if (existsSync(dotEnvPath)) {
   const localConfiguration = parseDotenvFile(readFileSync(dotEnvPath, 'utf-8'))
   // Merge configurations, local takes precedence, in case it was edited.
-  Object.assign(configuration[projectName], localConfiguration)
+  Object.assign(configuration[projectName] as object, localConfiguration)
 }
 
 const updatedTemplate = createConfigurationTemplate()
@@ -118,7 +121,7 @@ writeFileSync(configurationPath, updatedTemplate)
 
 writeFileSync(
   dotEnvPath,
-  Object.entries(configuration[projectName])
+  Object.entries(configuration[projectName] as object)
     .map(([key, value]) => `${key}=${value}`)
     .join('\n'),
 )

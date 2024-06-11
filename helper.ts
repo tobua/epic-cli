@@ -28,9 +28,11 @@ export function scriptExists(script: string) {
   const listsPath = output.startsWith(`${script} is /`)
 
   // Ignore if command comes from previously installed plugin.
-  if (listsPath && !realpathSync((output.match(/.*\sis\s(.*)/) ?? [])[1]).includes('epic-cli')) {
+  if (listsPath && !realpathSync((output.match(/.*\sis\s(.*)/) ?? [])[1] as string).includes('epic-cli')) {
     return false
   }
 
   return true
 }
+
+export const bold = (text: string) => `\x1b[1m${text}\x1b[0m`

@@ -38,6 +38,12 @@ refresh
 
 Reinstalls node_modules in current directory. Add `--lock` flag to also remove the `bun.lockb` file first.
 
+```sh
+run
+```
+
+Lists currently available scripts and allows multi-selection of scripts to run.
+
 ```
 init [name]
 ```
