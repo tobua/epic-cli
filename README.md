@@ -30,7 +30,7 @@ After the installation the following commands can be used from anywhere within t
 update
 ```
 
-Update current package dependency versions. This will update all versions with ranges to the latest version. Exactly specified versions or dist tags will be ignored.
+Update current package dependency versions. This will update all versions with ranges to the latest version. Exactly specified versions or dist tags will be ignored. Add the `--no-install` flag to avoid updating node modules.
 
 ```
 refresh
@@ -43,6 +43,12 @@ run
 ```
 
 Lists currently available scripts and allows multi-selection of scripts to run.
+
+```sh
+types
+```
+
+Check TypeScript using `tsc`. Will list number of files checked, add `--files` to list all relative files except ones from node modules.
 
 ```
 init [name]

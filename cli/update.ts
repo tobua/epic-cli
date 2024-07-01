@@ -4,6 +4,8 @@ import Bun from 'bun'
 import { diff, neq, valid } from 'semver'
 import { bold } from '../helper'
 
+const skipUpdate = process.argv.includes('--no-install')
+
 const updatedDependencies: { name: string; previous: string; latest: string; breaking: boolean }[] = []
 let processedDependencies = 0
 const versionRangeRegex = /(\^|~|>=|>|<=|<)?\d+(\.\d+){0,2}(\.\*)?/
@@ -76,13 +78,16 @@ if (updatedDependencies.length !== 0) {
     )
   }
   Bun.write('./package.json', `${JSON.stringify(packageJson, null, 2)}\n`)
-  console.log('Installing new dependencies with Bun.')
-  // Using bun shell here will not exit in tests...
-  execSync('bun update', {
-    stdio: 'inherit',
-  })
-  // NOTE write package again after "bun update" as it will turn ~ ranges into ^ ranges.
-  Bun.write('./package.json', `${JSON.stringify(packageJson, null, 2)}\n`)
+
+  if (!skipUpdate) {
+    console.log('Installing new dependencies with Bun.')
+    // Using bun shell here will not exit in tests...
+    execSync('bun update', {
+      stdio: 'inherit',
+    })
+    // NOTE write package again after "bun update" as it will turn ~ ranges into ^ ranges.
+    Bun.write('./package.json', `${JSON.stringify(packageJson, null, 2)}\n`)
+  }
 } else {
   console.log('All dependencies are up to date.')
 }

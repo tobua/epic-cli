@@ -1,4 +1,4 @@
-import { test, expect } from 'bun:test'
+import { expect, test } from 'bun:test'
 import { getScripts, scriptExists } from '../helper'
 
 test('Scripts are listed.', () => {
