@@ -25,7 +25,7 @@
     "@types/semver": "^7.5.8",
     "@types/validate-npm-package-name": "^4.0.2",
     "typescript": "^5.5.3",
-    "zero-configuration": "^0.13.0"
+    "zero-configuration": "^0.16.1"
   },
   "trustedDependencies": [
     "zero-configuration"
