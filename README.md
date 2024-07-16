@@ -85,3 +85,9 @@ workspaces "update"
 ```
 
 Run an arbitrary command passed as the second argument in every workspace of the current project. Use the `--output` flag to show the output when running the command.
+
+```
+folders "./template/*" "update --no-install"
+```
+
+Run an arbitrary command passed as the third argument in every folder matched by the glob passed as the second argument. Use the `--output` flag to show the output when running the command.
