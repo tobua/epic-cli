@@ -13,6 +13,7 @@ const { scripts: selection } = await prompt([
     name: 'scripts',
     message: 'Which scripts do you want to run?',
     choices: Object.entries(scripts).map((entry) => ({ title: `${bold(entry[0])}: ${entry[1]}`, value: entry[0] })),
+    instructions: false, // This is for advanced CLI users.
   },
 ])
 

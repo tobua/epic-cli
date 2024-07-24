@@ -1,5 +1,4 @@
 #!/usr/bin/env bun
-/* eslint-disable no-continue,no-restricted-syntax */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { basename, dirname, join } from 'node:path'
@@ -12,8 +11,8 @@ if (!existsSync(dirname(configurationPath))) {
   process.exit(1)
 }
 
-// Example: { epic-language: { OPENAI_API_KEY: '123' } }
-const configuration: { [key: string]: { [key: string]: string } } = {}
+// Example: { epic-language: ['OPENAI_API_KEY=123'] }
+const configuration: { [key: string]: string[] } = {}
 const projectName = basename(process.cwd())
 
 if (!projectName) {
@@ -23,31 +22,20 @@ if (!projectName) {
 
 function parseConfiguration(contents: string) {
   let currentProject: string | undefined = undefined
-
   const lines = contents.split('\n')
 
   for (const line of lines) {
     const trimmedLine = line.trim()
 
-    // Skip comments and empty lines
-    if (!trimmedLine || trimmedLine.startsWith('#')) {
-      continue
-    }
-
     // Check if the line is a project declaration
     const projectMatch = trimmedLine.match(/^([^:]+):$/)
     if (projectMatch) {
       ;[, currentProject] = projectMatch
-      configuration[currentProject as string] = {}
-    } else {
-      // Parse key-value pairs for the current project
-      const [key, value] = trimmedLine.split('=')
-      if (key && value && currentProject) {
-        const current = configuration[currentProject]
-        if (current) {
-          current[key.trim()] = value.trim()
-        }
-      }
+      configuration[currentProject as string] = []
+    } else if (line !== '') {
+      // Parse lines for the current project
+      const current = configuration[currentProject as string]
+      current?.push(line)
     }
   }
 }
@@ -56,11 +44,9 @@ function createConfigurationTemplate() {
   let lines = '# Configuration managed by epic-cli\n\n'
   const projects = Object.entries(configuration)
 
-  projects.forEach(([project, keyValuePairs], index) => {
+  projects.forEach(([project, contents], index) => {
     lines += `${project}:\n\n`
-    for (const [key, value] of Object.entries(keyValuePairs)) {
-      lines += `${key}=${value}\n`
-    }
+    lines += contents.join('\n')
     if (index !== projects.length - 1) {
       lines += '\n'
     }
@@ -71,23 +57,8 @@ function createConfigurationTemplate() {
 
 function parseDotenvFile(content: string) {
   const lines = content.split('\n')
-  const parsedEnv: { [key: string]: string } = {}
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const line of lines) {
-    // Skip comments and empty lines
-    if (line.trim() === '' || line.trim().startsWith('#')) {
-      continue
-    }
-
-    // Parse key-value pairs
-    const [key, value] = line.split('=')
-    if (key && value) {
-      parsedEnv[key.trim()] = value.trim()
-    }
-  }
-
-  return parsedEnv
+  // Skip comments and empty lines
+  return lines.filter((line) => line.trim() !== '')
 }
 
 if (existsSync(configurationPath)) {
@@ -105,7 +76,7 @@ if (process.argv.includes('--list')) {
 }
 
 if (!configuration[projectName]) {
-  configuration[projectName] = {}
+  configuration[projectName] = []
 }
 
 const dotEnvPath = join(process.cwd(), '.env')
@@ -119,9 +90,6 @@ if (existsSync(dotEnvPath)) {
 const updatedTemplate = createConfigurationTemplate()
 writeFileSync(configurationPath, updatedTemplate)
 
-writeFileSync(
-  dotEnvPath,
-  Object.entries(configuration[projectName] as object)
-    .map(([key, value]) => `${key}=${value}`)
-    .join('\n'),
-)
+if (configuration[projectName]) {
+  writeFileSync(dotEnvPath, configuration[projectName]?.join('\n') as string) // ?.join('\n')
+}

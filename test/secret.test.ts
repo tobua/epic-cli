@@ -16,6 +16,7 @@ beforeAll(() => {
   }
 })
 
+// Original iCloud env file is stored and restored before and after each test.
 let initialContents = ''
 beforeEach(() => {
   if (existsSync(configurationPath)) {
@@ -128,4 +129,28 @@ test('Will add new dotenv variables to store.', () => {
   expect(storeContents).toContain('another-project:')
   expect(storeContents).toContain('MY_KEY=987') // Local values will override store.
   expect(storeContents).toContain('NEW_KEY=hello World!')
+})
+
+test('Can parse existing dotenv with comments.', () => {
+  const withCommentsPath = './test/fixture/secret/with-comments'
+
+  const dotEnvContentInitially = readFileSync(join(withCommentsPath, '.env'), 'utf-8')
+
+  execSync('bun ../../../../cli/secret.ts', {
+    cwd: withCommentsPath,
+    stdio: 'pipe',
+  })
+
+  const storeContents = readFileSync(configurationPath, 'utf-8')
+
+  expect(storeContents).toContain('with-comments:')
+  expect(storeContents).toContain('MY_KEY=987\n# First comment')
+  expect(storeContents).toContain('NEW_KEY=hello World!')
+  expect(storeContents).toContain('# and the third comment?!')
+  expect(storeContents).toContain('ANOTHER_KEY=123')
+  expect(storeContents).not.toContain('epic-language:')
+
+  const dotEnvContents = readFileSync(join(withCommentsPath, '.env'), 'utf-8')
+
+  expect(dotEnvContents).toEqual(dotEnvContentInitially)
 })
