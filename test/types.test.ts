@@ -9,7 +9,7 @@ test('Checks types and lists file count.', () => {
   }).toString()
 
   // biome-ignore lint/suspicious/noControlCharactersInRegex: Don't get what's the problem...
-  expect(output).toMatch(/^\u001B\[1m\d{2}\u001B\[0m files checked/)
+  expect(output).toMatch(/^\u001B\[1m\d{2}\u001B\[22m files checked/)
 })
 
 test('Checks types with --files flag and lists specific files.', () => {

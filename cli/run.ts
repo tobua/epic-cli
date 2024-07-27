@@ -25,7 +25,7 @@ if (!selection || selection.length === 0) {
 for (const script of selection as string[]) {
   console.log(`Running script ${bold(script)}.`)
   try {
-    execSync(`bun run ${scripts[script]}`, { cwd: process.cwd(), stdio: 'inherit' })
+    execSync(`bun run ${script}`, { cwd: process.cwd(), stdio: 'inherit' })
   } catch (_error) {
     console.error(`${bold(script)} failed.`)
   }

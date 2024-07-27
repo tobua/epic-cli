@@ -1,5 +1,6 @@
 #!/usr/bin/env bun
 import { execSync } from 'node:child_process'
+import { styleText } from 'node:util'
 import Bun from 'bun'
 import { diff, neq, valid } from 'semver'
 import { bold } from '../helper'
@@ -72,8 +73,8 @@ if (updatedDependencies.length !== 0) {
   console.log(`${updatedDependencies.length} dependencies updated.`)
   for (const update of updatedDependencies) {
     console.log(
-      `\u001b[1m${update.name}\u001b[0m ${update.previous} ➜ ${update.latest}${
-        update.breaking ? ' \u001b[1m\u001b[31mBREAKING CHANGE!\u001b[0m' : ''
+      `${styleText('bold', update.name)} ${update.previous} ➜ ${update.latest}${
+        update.breaking ? styleText('bold', styleText('red', ' BREAKING CHANGE!')) : ''
       }`,
     )
   }

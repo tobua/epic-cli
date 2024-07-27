@@ -1,5 +1,6 @@
 #!/usr/bin/env bun
 import { type ExecException, execSync } from 'node:child_process'
+import { styleText } from 'node:util'
 
 const listFiles = process.argv.includes('--files')
 
@@ -36,7 +37,7 @@ if (hasErrors) {
 const filePaths = processedOutput.map((line) => line.split(':')[0])
 const uniqueFilePaths = [...new Set(filePaths)]
 
-console.log(`\x1b[1m${uniqueFilePaths.length}\x1b[0m files checked.`)
+console.log(`${styleText('bold', String(uniqueFilePaths.length))} files checked.`)
 
 if (listFiles) {
   console.log(uniqueFilePaths.join('\n'))
