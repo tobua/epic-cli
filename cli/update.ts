@@ -3,7 +3,6 @@ import { execSync } from 'node:child_process'
 import { styleText } from 'node:util'
 import Bun from 'bun'
 import { diff, neq, valid } from 'semver'
-import { bold } from '../helper'
 
 const skipUpdate = process.argv.includes('--no-install')
 
@@ -95,6 +94,6 @@ if (updatedDependencies.length !== 0) {
 
 if (exactDependencies.length) {
   console.log(
-    `Warning: Dependencies ${exactDependencies.map(({ name, version }) => `${bold(name)} (${version})`).join(',')} won't be updated as they are exact. Add a version range to ensure automatic updates.`,
+    `Warning: Dependencies ${exactDependencies.map(({ name, version }) => `${styleText('bold', name)} (${version})`).join(',')} won't be updated as they are exact. Add a version range to ensure automatic updates.`,
   )
 }

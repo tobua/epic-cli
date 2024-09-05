@@ -45,6 +45,12 @@ run
 Lists currently available scripts and allows multi-selection of scripts to run.
 
 ```sh
+commit
+```
+
+To be used before committing, runs "check", "types" and "test" scripts if available and lists success or failure.
+
+```sh
 types
 ```
 

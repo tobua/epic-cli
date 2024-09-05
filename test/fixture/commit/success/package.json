@@ -1,0 +1,8 @@
+{
+	"name": "success",
+	"scripts": {
+		"check": "echo \"Check...\"",
+		"types": "echo \"Types...\"",
+		"test": "echo \"Test...\""
+	}
+}

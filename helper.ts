@@ -34,5 +34,3 @@ export function scriptExists(script: string) {
 
   return true
 }
-
-export const bold = (text: string) => `\x1b[1m${text}\x1b[0m`

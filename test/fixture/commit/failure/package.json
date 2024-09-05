@@ -1,0 +1,6 @@
+{
+	"name": "failure",
+	"scripts": {
+		"check": "bun fail.ts"
+	}
+}
