@@ -30,11 +30,11 @@ test('Lists package updates.', () => {
   expect(modifiedPackage.peerDependencies.immutable).toEqual('>= 3.7')
 
   // bun update was run.
-  expect(existsSync('./test/fixture/update/basic/bun.lockb')).toBe(true)
+  expect(existsSync('./test/fixture/update/basic/bun.lock')).toBe(true)
 
   // Reset package contents.
   writeFileSync('./test/fixture/update/basic/package.json', JSON.stringify(initialPackage, null, 2))
-  rmSync('./test/fixture/update/basic/bun.lockb')
+  rmSync('./test/fixture/update/basic/bun.lock')
   rmSync('./test/fixture/update/basic/node_modules', { recursive: true })
 }, 120000)
 
@@ -51,5 +51,5 @@ test('Skips update if all dependencies are already up-to-date.', () => {
   expect(initialPackage).toEqual(modifiedPackage)
 
   // No update necessary.
-  expect(existsSync('./test/fixture/update/basic/bun.lockb')).toBe(false)
+  expect(existsSync('./test/fixture/update/basic/bun.lock')).toBe(false)
 })

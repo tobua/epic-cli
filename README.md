@@ -56,44 +56,50 @@ types
 
 Check TypeScript using `tsc`. Will list number of files checked, add `--files` to list all relative files except ones from node modules.
 
-```
+```sh
 init [name]
 ```
 
 Quickly initialize a new project in the current folder using the parent folder as the default name.
 
-```
+```sh
 secret
 ```
 
 Stores and retreives `.env` variables for the current project from iCloud on macOS. Add the `--list` flag to show all currently stored secrets.
 
-```
+```sh
 global
 ```
 
 List and update globally installed packages.
 
-```
+```sh
 format
 ```
 
 Format `package.json` in current folder.
 
-```
+```sh
 files
 ```
 
 List nested files inside current folder in a tree structure.
 
-```
+```sh
 workspaces "update"
 ```
 
 Run an arbitrary command passed as the second argument in every workspace of the current project. Use the `--output` flag to show the output when running the command.
 
-```
+```sh
 folders "./template/*" "update --no-install"
 ```
 
 Run an arbitrary command passed as the third argument in every folder matched by the glob passed as the second argument. Use the `--output` flag to show the output when running the command.
+
+```sh
+ports
+```
+
+List open commonly used web development ports and close them when selected.

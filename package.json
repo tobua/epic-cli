@@ -11,23 +11,23 @@
     "types": "tsc"
   },
   "dependencies": {
-    "@npmcli/map-workspaces": "^3.0.6",
-    "fast-glob": "^3.3.2",
+    "@npmcli/map-workspaces": "^4.0.2",
+    "fast-glob": "^3.3.3",
     "pakag": "^3.1.4",
     "prompts": "^2.4.2",
-    "semver": "^7.6.3",
+    "semver": "^7.7.1",
     "tree-node-cli": "^1.6.0",
-    "validate-npm-package-name": "^5.0.1"
+    "validate-npm-package-name": "^6.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.8.3",
-    "@types/bun": "^1.1.8",
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.2.4",
     "@types/npmcli__map-workspaces": "^3.0.4",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.5.8",
     "@types/validate-npm-package-name": "^4.0.2",
-    "typescript": "^5.5.4",
-    "zero-configuration": "^0.17.3"
+    "typescript": "^5.8.2",
+    "zero-configuration": "^0.18.1"
   },
   "trustedDependencies": [
     "zero-configuration"
@@ -41,6 +41,7 @@
     "format": "./cli/format.ts",
     "global": "./cli/global.ts",
     "init": "./cli/init.ts",
+    "ports": "./cli/ports.ts",
     "refresh": "./cli/refresh.ts",
     "run": "./cli/run.ts",
     "secret": "./cli/secret.ts",
@@ -77,7 +78,11 @@
       "linter": {
         "rules": {
           "suspicious": {
+            "noConsole": "off",
             "noConsoleLog": "off"
+          },
+          "performance": {
+            "useTopLevelRegex": "off"
           },
           "correctness": {
             "noNodejsModules": "off"

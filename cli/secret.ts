@@ -21,7 +21,7 @@ if (!projectName) {
 }
 
 function parseConfiguration(contents: string) {
-  let currentProject: string | undefined = undefined
+  let currentProject: string | undefined
   const lines = contents.split('\n')
 
   for (const line of lines) {

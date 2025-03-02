@@ -68,7 +68,7 @@ await Promise.all(
 
 process.stdout.write('\r\x1b[K') // Clear progress output.
 
-if (updatedDependencies.length !== 0) {
+if (updatedDependencies.length > 0) {
   console.log(`${updatedDependencies.length} dependencies updated.`)
   for (const update of updatedDependencies) {
     console.log(
@@ -92,7 +92,7 @@ if (updatedDependencies.length !== 0) {
   console.log('All dependencies are up to date.')
 }
 
-if (exactDependencies.length) {
+if (exactDependencies.length > 0) {
   console.log(
     `Warning: Dependencies ${exactDependencies.map(({ name, version }) => `${styleText('bold', name)} (${version})`).join(',')} won't be updated as they are exact. Add a version range to ensure automatic updates.`,
   )
