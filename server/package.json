@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "start": "bun --watch index.ts",
+    "check": "biome check --write .",
+    "seed": "bun seed.ts --seed",
+    "types": "tsc",
+    "database": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@elysiajs/cors": "^1.2.0",
+    "@types/bun": "^1.2.6",
+    "drizzle-kit": "^0.30.5",
+    "drizzle-orm": "^0.41.0",
+    "eipiai": "^0.6.2",
+    "elysia": "^1.2.25",
+    "typescript": "^5.8.2",
+    "zero-configuration": "^0.18.2"
+  },
+  "trustedDependencies": [
+    "zero-configuration"
+  ],
+  "type": "module"
+}

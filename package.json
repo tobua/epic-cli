@@ -21,13 +21,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/bun": "^1.2.4",
+    "@types/bun": "^1.2.6",
     "@types/npmcli__map-workspaces": "^3.0.4",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.5.8",
     "@types/validate-npm-package-name": "^4.0.2",
     "typescript": "^5.8.2",
-    "zero-configuration": "^0.18.1"
+    "zero-configuration": "^0.18.2"
   },
   "trustedDependencies": [
     "zero-configuration"
