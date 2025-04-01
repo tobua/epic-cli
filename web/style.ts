@@ -14,8 +14,10 @@ export function styles() {
   document.body.style.fontFamily = 'sans-serif'
 
   document.documentElement.style.minHeight = '100vh'
-  document.body.style.minHeight = '100vh' // Fallback if unsupported.
+  document.body.style.display = 'flex'
+  document.body.style.flexDirection = 'column'
+  document.body.style.height = '100vh' // Fallback if unsupported.
   if (window.CSS.supports('max-height', '100dvh')) {
-    document.body.style.minHeight = '100dvh'
+    document.body.style.height = '100dvh'
   }
 }
