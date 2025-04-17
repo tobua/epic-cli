@@ -3,6 +3,7 @@ import { api, route, z } from 'eipiai'
 import { eipiai } from 'eipiai/elysia'
 import { Elysia } from 'elysia'
 import { connect } from './database'
+import { environmentVariables } from './route/environment'
 import * as schema from './schema'
 
 export const routes = api({
@@ -24,6 +25,7 @@ export const routes = api({
     const tabs = await connect()?.insert(schema.tabs).values({ name, folder }).returning({ id: schema.tabs.id })
     return tabs[0].id
   }),
+  environmentVariables,
 })
 
 const { server } = new Elysia()

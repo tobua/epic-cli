@@ -1,6 +1,7 @@
 import { render } from 'epic-jsx'
 import { plugin } from 'epic-state'
 import { connect } from 'epic-state/connect'
+import { EnvrionmentVariables } from 'markup/environment-variables'
 import { Input } from 'markup/input'
 import { Output } from 'markup/output'
 import { Tabs } from 'markup/tabs'
@@ -22,13 +23,17 @@ function App() {
   return (
     <>
       <Header>
-        <Lead>EPIC CLI</Lead>
+        <Horizontal style="flex1 alignItems-center justifyContent-space-between">
+          <Lead>EPIC CLI</Lead>
+          <Button>Environment Variables</Button>
+        </Horizontal>
       </Header>
       <Content>
         <Tabs />
         <Scripts />
         <Output />
         <Input />
+        <EnvrionmentVariables />
       </Content>
     </>
   )

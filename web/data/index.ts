@@ -1,4 +1,4 @@
-import { list, state } from 'epic-state'
+import { list, load, state } from 'epic-state'
 import { server } from 'interface/server'
 
 let outputRef: HTMLElement
@@ -27,6 +27,8 @@ export const State = state({
     console.log('ref', ref)
     outputRef = ref
   },
+  // @ts-expect-error TODO epic-state also allow string for error state.
+  variables: load(() => server.environmentVariables()),
 })
 
 async function loadData() {
