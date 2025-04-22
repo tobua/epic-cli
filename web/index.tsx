@@ -1,5 +1,5 @@
 import { render } from 'epic-jsx'
-import { plugin } from 'epic-state'
+import { plugin, setTo, state } from 'epic-state'
 import { connect } from 'epic-state/connect'
 import { EnvrionmentVariables } from 'markup/environment-variables'
 import { Input } from 'markup/input'
@@ -20,20 +20,35 @@ const Scripts = () => (
 )
 
 function App() {
+  this.state = state(() => ({
+    tab: 'terminal' as 'terminal' | 'environment-variables',
+  }))
+
   return (
     <>
       <Header>
         <Horizontal style="flex1 alignItems-center justifyContent-space-between">
           <Lead>EPIC CLI</Lead>
-          <Button>Environment Variables</Button>
+          <Horizontal>
+            <Button bold={this.state.tab === 'terminal'} onClick={setTo(this.state, 'tab', 'terminal')}>
+              Terminal
+            </Button>
+            <Button bold={this.state.tab === 'environment-variables'} onClick={setTo(this.state, 'tab', 'environment-variables')}>
+              Environment Variables
+            </Button>
+          </Horizontal>
         </Horizontal>
       </Header>
       <Content>
-        <Tabs />
-        <Scripts />
-        <Output />
-        <Input />
-        <EnvrionmentVariables />
+        {this.state.tab === 'terminal' && (
+          <>
+            <Tabs />
+            <Scripts />
+            <Output />
+            <Input />
+          </>
+        )}
+        {this.state.tab === 'environment-variables' && <EnvrionmentVariables />}
       </Content>
     </>
   )

@@ -7,6 +7,7 @@ export const Lead = tag(Text, 'fontSize-lead bold color-highlight')
 export const Button = tag('button', 'button bg-interact color-white p-medium r-large', {
   hover: 'bg-lightgray color-black',
   press: 'bg-highlight color-white',
+  bold: 'bold',
 })
 export const Horizontal = tag('div', 'flex gap-medium alignItems-center', {
   center: 'justifyContent-center',

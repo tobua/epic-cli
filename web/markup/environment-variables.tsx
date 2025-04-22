@@ -1,7 +1,7 @@
 import { State } from 'data/index'
 import { tag } from 'epic-tag'
 import { error, loading } from 'markup/plugins'
-import { Text, Vertical } from 'tags'
+import { Button, Horizontal, Text, Vertical } from 'tags'
 
 const Wrapper = tag('form', 'flex column gap-large fullWidth relative shadow-small p-medium r-large')
 const Project = tag('div', 'flex column gap-medium')
@@ -13,7 +13,10 @@ export function EnvrionmentVariables() {
     <Wrapper>
       {Object.keys(State.variables.data).map((project) => (
         <Project>
-          <Text bold={true}>{project}</Text>
+          <Horizontal style="alignItems-center justifyContent-space-between">
+            <Text bold={true}>{project}</Text>
+            <Button>Delete</Button>
+          </Horizontal>
           <Vertical>
             {Object.entries(State.variables.data[project]).map(([key, value]) => (
               <Text>
