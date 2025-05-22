@@ -61,6 +61,67 @@ function parseDotenvFile(content: string) {
   return lines.filter((line) => line.trim() !== '')
 }
 
+function processComments(lines: string[]) {
+  const regularLines: string[] = []
+  const comments: string[] = []
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (trimmed.startsWith('#')) {
+      comments.push(trimmed)
+      continue
+    }
+
+    // Find the first # that's not in quotes and not escaped
+    let inQuotes = false
+    let quoteChar = ''
+    let commentFound = false
+
+    for (let i = 0; i < trimmed.length; i++) {
+      const char = trimmed[i]
+      const prevChar = trimmed[i - 1]
+
+      if ((char === '"' || char === "'") && prevChar !== '\\') {
+        if (!inQuotes) {
+          inQuotes = true
+          quoteChar = char
+        } else if (char === quoteChar) {
+          inQuotes = false
+        }
+      }
+
+      if (char === '#' && !inQuotes && prevChar !== '\\') {
+        const regularPart = trimmed.slice(0, i)
+        const commentPart = trimmed.slice(i)
+        comments.push(commentPart)
+        regularLines.push(regularPart)
+        commentFound = true
+      }
+    }
+
+    if (!commentFound) {
+      regularLines.push(trimmed)
+    }
+  }
+
+  if (comments.length === 0) {
+    return regularLines
+  }
+
+  const readmePath = join(process.cwd(), 'README.md')
+
+  if (!existsSync(readmePath)) {
+    console.warn('Please remove comments from the .env file and try again.')
+    process.exit(1)
+  }
+
+  const readme = readFileSync(readmePath, 'utf-8')
+  const newContent = `${readme}\n\n## Comments from Environment Variables\n${comments.join('\n')}`
+  writeFileSync(readmePath, newContent)
+  console.log('Comments in .env not supported have been moved to the end of your README.md.')
+
+  return regularLines
+}
+
 if (existsSync(configurationPath)) {
   console.log(`Found existing configuration in iCloud » Documents » ${configurationFile}`)
   parseConfiguration(readFileSync(configurationPath, 'utf-8'))
@@ -83,8 +144,9 @@ const dotEnvPath = join(process.cwd(), '.env')
 
 if (existsSync(dotEnvPath)) {
   const localConfiguration = parseDotenvFile(readFileSync(dotEnvPath, 'utf-8'))
+  const withoutComments = processComments(localConfiguration)
   // Merge configurations, local takes precedence, in case it was edited.
-  Object.assign(configuration[projectName] as object, localConfiguration)
+  Object.assign(configuration[projectName] as object, withoutComments)
 }
 
 const updatedTemplate = createConfigurationTemplate()

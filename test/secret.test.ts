@@ -49,12 +49,12 @@ test('Creates configuration file if none is found.', () => {
 
 const exampleContents = `# Configuration managed by epic-cli
 
-epic-language:
+${join(process.cwd(), 'test/fixture/secret/epic-language')}:
 
 OPENAI_API_KEY=123
 ANOTHER_KEY=456-789
 
-another-project:
+${join(process.cwd(), 'test/fixture/secret/another-project')}:
 
 MY_KEY=567`
 
@@ -72,11 +72,9 @@ test('Can parse existing configuration.', () => {
 
 test('Can parse existing dotenv.', () => {
   const anotherProjectPath = './test/fixture/secret/another-project'
-  // writeFileSync(configurationPath, exampleContents)
 
   execSync('bun ../../../../cli/secret.ts', {
     cwd: anotherProjectPath,
-    stdio: 'pipe',
   })
 
   const storeContents = readFileSync(configurationPath, 'utf-8')
@@ -97,7 +95,6 @@ test('Can restore dotenv from store.', () => {
 
   execSync('bun ../../../../cli/secret.ts', {
     cwd: epicLanguagePath,
-    stdio: 'pipe',
   })
 
   const dotEnvPath = join(epicLanguagePath, '.env')
@@ -121,7 +118,6 @@ test('Will add new dotenv variables to store.', () => {
 
   execSync('bun ../../../../cli/secret.ts', {
     cwd: anotherProjectPath,
-    stdio: 'pipe',
   })
 
   const storeContents = readFileSync(configurationPath, 'utf-8')
@@ -131,28 +127,76 @@ test('Will add new dotenv variables to store.', () => {
   expect(storeContents).toContain('NEW_KEY=hello World!')
 })
 
+test('Will exit when comments are present.', () => {
+  const withCommentsPath = './test/fixture/secret/with-comments'
+  const dotEnvContentInitially = `MY_KEY=987
+# First comment
+NEW_KEY=hello World!
+# Second comment!
+# and the third comment?!
+ANOTHER_KEY=123`
+  writeFileSync(join(withCommentsPath, '.env'), dotEnvContentInitially)
+  if (existsSync(join(withCommentsPath, 'README.md'))) {
+    rmSync(join(withCommentsPath, 'README.md'))
+  }
+
+  let errorCaught = false
+  try {
+    execSync('bun ../../../../cli/secret.ts', {
+      cwd: withCommentsPath,
+      stdio: 'pipe',
+      encoding: 'utf-8',
+    })
+  } catch (error) {
+    errorCaught = true
+    expect(error.message).toContain('Please remove comments')
+    expect(error.status).toBe(1)
+  }
+
+  expect(errorCaught).toBe(true)
+  const dotEnvContents = readFileSync(join(withCommentsPath, '.env'), 'utf-8')
+  expect(dotEnvContents).toEqual(dotEnvContentInitially)
+})
+
 test('Can parse existing dotenv with comments.', () => {
   const withCommentsPath = './test/fixture/secret/with-comments'
+  const dotEnvContentInitially = `MY_KEY=987
+# First comment
+NEW_KEY=hello World!
+# Second comment!
+# and the third comment?!
+END_COMMENT=true # At the end
+ESCAPED="tr#ue"
+INLINE_ESCAPED=tr\\#ue  # Escaped comment
+ANOTHER_KEY=123`
+  writeFileSync(join(withCommentsPath, 'README.md'), '# README\n\nhello')
+  writeFileSync(join(withCommentsPath, '.env'), dotEnvContentInitially)
 
-  const dotEnvContentInitially = readFileSync(join(withCommentsPath, '.env'), 'utf-8')
-
-  execSync('bun ../../../../cli/secret.ts', {
+  const output = execSync('bun ../../../../cli/secret.ts', {
     cwd: withCommentsPath,
     stdio: 'pipe',
+    encoding: 'utf-8',
   })
 
   const storeContents = readFileSync(configurationPath, 'utf-8')
 
-  expect(storeContents).toContain('with-comments:')
-  expect(storeContents).toContain('MY_KEY=987\n# First comment')
-  expect(storeContents).toContain('NEW_KEY=hello World!')
-  expect(storeContents).toContain('# and the third comment?!')
+  expect(storeContents).toContain('END_COMMENT=true')
+  expect(storeContents).toContain('ESCAPED="tr#ue"')
+  expect(storeContents).toContain('INLINE_ESCAPED=tr\\#ue')
   expect(storeContents).toContain('ANOTHER_KEY=123')
-  expect(storeContents).not.toContain('epic-language:')
+  expect(storeContents).toContain('MY_KEY=987')
+
+  expect(output).toContain('Comments in .env not supported have been moved to the end of your README.md.')
 
   const dotEnvContents = readFileSync(join(withCommentsPath, '.env'), 'utf-8')
 
-  expect(dotEnvContents).toEqual(dotEnvContentInitially)
+  expect(dotEnvContents).not.toContain('# ')
+
+  const readmeContents = readFileSync(join(withCommentsPath, 'README.md'), 'utf-8')
+
+  expect(readmeContents).toContain('## Comments from Environment Variables')
+  expect(readmeContents).toContain('# First comment')
+  expect(readmeContents).toContain('# and the third comment?!')
 })
 
 test('Lists all stored secrets.', () => {
