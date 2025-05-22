@@ -154,3 +154,23 @@ test('Can parse existing dotenv with comments.', () => {
 
   expect(dotEnvContents).toEqual(dotEnvContentInitially)
 })
+
+test('Lists all stored secrets.', () => {
+  const anotherProjectPath = './test/fixture/secret/another-project'
+
+  // Regular run to parse contents.
+  execSync('bun ../../../../cli/secret.ts', {
+    cwd: anotherProjectPath,
+    stdio: 'pipe',
+  })
+
+  const output = execSync('bun ../../../../cli/secret.ts --list', {
+    cwd: anotherProjectPath,
+    stdio: 'pipe',
+    encoding: 'utf-8',
+  })
+
+  expect(output).toContain('MY_KEY=987')
+  expect(output).toContain('NEW_KEY=hello World!')
+  expect(output).toContain(`"${join(process.cwd(), 'test/fixture/secret/another-project')}"`)
+})

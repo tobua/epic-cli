@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
-import { basename, dirname, join } from 'node:path'
+import { dirname, join } from 'node:path'
 
 const configurationFile = '.env-variables'
 const configurationPath = join(homedir(), 'Library/Mobile Documents/com~apple~CloudDocs/Documents', configurationFile)
@@ -13,7 +13,7 @@ if (!existsSync(dirname(configurationPath))) {
 
 // Example: { epic-language: ['OPENAI_API_KEY=123'] }
 const configuration: { [key: string]: string[] } = {}
-const projectName = basename(process.cwd())
+const projectName = process.cwd()
 
 if (!projectName) {
   console.log(`Cannot find the current project in "${process.cwd()}".`)

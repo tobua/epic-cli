@@ -8,26 +8,27 @@
   "scripts": {
     "check": "biome check --write .",
     "clean": "git clean -fdx test/fixture",
-    "types": "tsc"
+    "test": "bun test test/*",
+    "types": "tsc && tsc --project ./test/tsconfig.json"
   },
   "dependencies": {
     "@npmcli/map-workspaces": "^4.0.2",
     "fast-glob": "^3.3.3",
     "pakag": "^3.1.4",
     "prompts": "^2.4.2",
-    "semver": "^7.7.1",
+    "semver": "^7.7.2",
     "tree-node-cli": "^1.6.0",
     "validate-npm-package-name": "^6.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@types/bun": "^1.2.8",
+    "@types/bun": "^1.2.14",
     "@types/npmcli__map-workspaces": "^3.0.4",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.0",
     "@types/validate-npm-package-name": "^4.0.2",
-    "typescript": "^5.8.2",
-    "zero-configuration": "^0.18.2"
+    "typescript": "^5.8.3",
+    "zero-configuration": "^0.19.0"
   },
   "trustedDependencies": [
     "zero-configuration"
@@ -64,17 +65,35 @@
   "configuration": {
     "vscode": "biome",
     "gitignore": "recommended",
-    "typescript": {
-      "extends": "plugin",
-      "compilerOptions": {
-        "jsx": "react-jsx"
+    "typescript": [
+      {
+        "extends": "plugin",
+        "compilerOptions": {
+          "jsx": "react-jsx"
+        },
+        "include": [
+          "cli/*"
+        ]
       },
-      "include": [
-        "cli/*"
-      ]
-    },
+      {
+        "extends": "plugin",
+        "folder": "test",
+        "compilerOptions": {
+          "strict": false
+        },
+        "include": [
+          "**/*.test.ts"
+        ]
+      }
+    ],
     "biome": {
       "extends": "recommended",
+      "files": {
+        "ignore": [
+          "server",
+          "web"
+        ]
+      },
       "linter": {
         "rules": {
           "suspicious": {
