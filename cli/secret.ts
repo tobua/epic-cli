@@ -136,7 +136,9 @@ if (process.argv.includes('--list')) {
   process.exit(0)
 }
 
-if (!configuration[projectName]) {
+const projectMissing = !configuration[projectName]
+
+if (projectMissing) {
   configuration[projectName] = []
 }
 
@@ -147,11 +149,13 @@ if (existsSync(dotEnvPath)) {
   const withoutComments = processComments(localConfiguration)
   // Merge configurations, local takes precedence, in case it was edited.
   Object.assign(configuration[projectName] as object, withoutComments)
+} else if (projectMissing) {
+  console.log('No existing configuration for this project or .env file found!')
 }
 
 const updatedTemplate = createConfigurationTemplate()
 writeFileSync(configurationPath, updatedTemplate)
 
-if (configuration[projectName]) {
+if (configuration[projectName] && configuration[projectName].length > 0) {
   writeFileSync(dotEnvPath, configuration[projectName]?.join('\n') as string) // ?.join('\n')
 }

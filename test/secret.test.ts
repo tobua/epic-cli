@@ -218,3 +218,16 @@ test('Lists all stored secrets.', () => {
   expect(output).toContain('NEW_KEY=hello World!')
   expect(output).toContain(`"${join(process.cwd(), 'test/fixture/secret/another-project')}"`)
 })
+
+test('Warns if project and file are missing.', () => {
+  const missingProjectPath = './test/fixture/secret/missing-project'
+  writeFileSync(configurationPath, exampleContents)
+
+  const output = execSync('bun ../../../../cli/secret.ts', {
+    cwd: missingProjectPath,
+    stdio: 'pipe',
+  }).toString()
+
+  expect(output).toContain('No existing configuration for this project or .env file found!')
+  expect(existsSync(join(missingProjectPath, '.env'))).toBe(false)
+})
