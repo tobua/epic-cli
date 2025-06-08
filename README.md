@@ -36,7 +36,7 @@ Update current package dependency versions. This will update all versions with r
 refresh
 ```
 
-Reinstalls node_modules in current directory. Add `--lock` flag to also remove the `bun.lockb` file first.
+Reinstalls node_modules in current directory. Always removes the lock file as well.
 
 ```sh
 run

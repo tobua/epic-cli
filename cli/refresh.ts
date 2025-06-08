@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
+import { execSync } from 'node:child_process'
 import { existsSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
-import { $ } from 'bun'
 
 const modulesPath = join(process.cwd(), 'node_modules')
 
@@ -9,10 +9,15 @@ if (existsSync(modulesPath)) {
   rmSync(modulesPath, { recursive: true })
 }
 
-const lockFilePath = join(process.cwd(), 'bun.lockb')
+const legacyLockFilePath = join(process.cwd(), 'bun.lockb')
+const newLockFilePath = join(process.cwd(), 'bun.lock')
 
-if (process.argv.includes('--lock') && existsSync(lockFilePath)) {
-  rmSync(lockFilePath)
+if (existsSync(legacyLockFilePath)) {
+  rmSync(legacyLockFilePath)
 }
 
-await $`bun install`.nothrow()
+if (existsSync(newLockFilePath)) {
+  rmSync(newLockFilePath)
+}
+
+execSync('bun install', { cwd: process.cwd(), stdio: 'inherit' })
